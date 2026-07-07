@@ -1,0 +1,326 @@
+<title>LED Teeth Whitening — Singapore Market Briefing</title>
+<style>
+  :root{
+    --ground:#FAF8F4; --ink:#16233B; --ink-soft:#4A5568; --led:#3D5BF5;
+    --led-soft:#EBEEFE; --teal:#0E8A6D; --teal-soft:#E4F3EE;
+    --amber:#B4690E; --amber-soft:#FBF1E2; --line:#E4DFD5; --card:#FFFFFF;
+    --serif:"Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.6;margin:0}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--led);font-weight:600}
+  h1,h2,h3{font-family:var(--serif);text-wrap:balance;line-height:1.15;margin:0}
+  h1{font-size:clamp(34px,6vw,54px);font-weight:700}
+  h2{font-size:clamp(24px,4vw,32px);margin-bottom:8px}
+  h3{font-size:19px}
+  p{max-width:64ch}
+  .muted{color:var(--ink-soft)}
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  a{color:var(--led)}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* hero */
+  header{padding:64px 0 48px}
+  .hero-flex{display:flex;gap:36px;align-items:center;flex-wrap:wrap}
+  .hero-copy{flex:1 1 380px}
+  .tooth-scene{flex:0 0 200px;display:flex;justify-content:center}
+  .lamp-glow{width:190px;height:190px;border-radius:50%;
+    background:radial-gradient(circle at 50% 32%,rgba(61,91,245,.28),transparent 62%),#fff;
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative}
+  .lamp-glow svg{width:120px;height:120px}
+  .kicker{font-size:18px;color:var(--ink-soft);max-width:56ch;margin-top:16px}
+  .fact-strip{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13.5px}
+  .chip b{font-family:var(--serif)}
+
+  /* verified badge */
+  .badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal-soft);color:var(--teal);
+    border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600}
+  .badge::before{content:"✓";font-weight:700}
+
+  /* slider */
+  .ladder-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;margin-top:24px}
+  input[type=range]{width:100%;accent-color:var(--led);height:32px;cursor:pointer}
+  .pct-read{font-family:var(--serif);font-size:clamp(36px,7vw,56px);font-weight:700;line-height:1}
+  .ladder-flex{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .verdict{flex:1 1 300px;border-radius:10px;padding:16px 18px;font-size:15.5px;transition:background .25s}
+  .verdict.ok{background:var(--teal-soft)} .verdict.rx{background:var(--led-soft)} .verdict.no{background:var(--amber-soft)}
+  .verdict b{display:block;font-family:var(--serif);font-size:17px;margin-bottom:2px}
+  .scale-marks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-top:4px}
+
+  /* tabs */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 20px}
+  .tab{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 18px;font-size:14.5px;
+    cursor:pointer;font-family:var(--sans);color:var(--ink-soft)}
+  .tab[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tab:focus-visible,.q:focus-visible,input:focus-visible{outline:3px solid var(--led);outline-offset:2px}
+  .panel{display:none}.panel.show{display:block}
+  .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+  .pcard .rank{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--led);font-weight:600}
+  .price{font-family:var(--serif);font-size:22px;font-weight:700}
+  .pcard small{color:var(--ink-soft);font-size:13px}
+  .note{background:var(--amber-soft);border-left:4px solid var(--amber);padding:14px 18px;border-radius:0 10px 10px 0;
+    font-size:14.5px;margin-top:22px;max-width:70ch}
+
+  /* bars */
+  .bars{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+  .bar-row{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:center;font-size:14px}
+  .bar-track{background:#F0EDE5;border-radius:6px;height:30px;position:relative;overflow:hidden}
+  .bar-fill{position:absolute;inset:0 auto 0 0;border-radius:6px;background:var(--led);width:0;
+    transition:width 1s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center}
+  .bar-fill span{color:#fff;font-size:12.5px;padding-left:10px;white-space:nowrap;font-weight:600}
+  .bar-fill.soft{background:#8FA0F1}.bar-fill.dark{background:var(--ink)}
+  @media (prefers-reduced-motion:reduce){.bar-fill{transition:none}}
+
+  /* trend */
+  .trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px}
+  .tcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .big{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.1}
+  .tcard p{font-size:14px;margin:8px 0 0}
+
+  /* FAQ */
+  .q{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;font-size:15.5px;font-weight:600;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+  .q::after{content:"+";float:right;font-family:var(--serif);font-size:20px;color:var(--led)}
+  .q[aria-expanded=true]::after{content:"–"}
+  .a{display:none;padding:14px 20px 6px;font-size:15px;color:var(--ink-soft)}
+  .a.show{display:block}
+  .faq-item{margin-bottom:12px}
+
+  footer{padding:48px 0 72px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-soft)}
+  footer ul{padding-left:18px;margin:10px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:18px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .tbl-scroll{overflow-x:auto}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="hero-flex">
+    <div class="hero-copy">
+      <div class="eyebrow">Market Briefing · Singapore · July 2026</div>
+      <h1>The Blue Light Business</h1>
+      <p class="kicker">LED teeth whitening looks like one market. In Singapore it is actually <b>three different businesses</b>, separated by a single government rule about one chemical. This short briefing explains who the players are, why the popular ones win, and where the world is heading.</p>
+      <div class="fact-strip">
+        <span class="chip">SG market in <b>3 tiers</b></span>
+        <span class="chip">Global market <b class="num">US$8.9B</b></span>
+        <span class="chip badge">19 facts independently verified</span>
+      </div>
+    </div>
+    <div class="tooth-scene" aria-hidden="true">
+      <div class="lamp-glow">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 18 C18 18 14 32 17 44 C20 56 26 62 27 74 C28 84 34 88 37 82 C40 76 39 66 50 66 C61 66 60 76 63 82 C66 88 72 84 73 74 C74 62 80 56 83 44 C86 32 82 18 70 18 C60 18 58 24 50 24 C42 24 40 18 30 18 Z"
+            fill="#fff" stroke="#16233B" stroke-width="3"/>
+          <line x1="50" y1="4" x2="50" y2="12" stroke="#3D5BF5" stroke-width="3" stroke-linecap="round"/>
+          <line x1="30" y1="8" x2="34" y2="15" stroke="#3D5BF5" stroke-width="3" stroke-linecap="round"/>
+          <line x1="70" y1="8" x2="66" y2="15" stroke="#3D5BF5" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="rule">
+  <div class="eyebrow">Part 1 · The rule that shapes everything</div>
+  <h2>One chemical decides who can do what</h2>
+  <p class="muted">Whitening works by bleaching stains with <b>hydrogen peroxide</b>. The stronger the peroxide, the whiter the result — and the more it needs professional hands. Singapore's health authority (HSA) draws hard legal lines by concentration. <b>Drag the slider</b> to see who is allowed to use each strength.</p>
+  <div class="ladder-card">
+    <div class="ladder-flex">
+      <div>
+        <div class="pct-read num" id="pctRead">0.1%</div>
+        <div class="muted" style="font-size:13px">hydrogen peroxide</div>
+      </div>
+      <div class="verdict ok" id="verdict" role="status">
+        <b id="vTitle">Anyone can sell this to you</b>
+        <span id="vBody">This is the legal ceiling for shops, whitening studios, and home kits. It is very mild — closer to a whitening toothpaste than a clinical treatment.</span>
+      </div>
+    </div>
+    <label for="pct" style="font-size:13px" class="muted">Peroxide strength</label>
+    <input type="range" id="pct" min="0" max="100" value="4" aria-label="Hydrogen peroxide strength">
+    <div class="scale-marks num"><span>0%</span><span>6%</span><span>15%</span><span>25%</span><span>35%</span></div>
+    <p class="muted" style="font-size:13px;margin-top:14px">Source: Health Sciences Authority &amp; Singapore Dental Association — verified against the original pages.</p>
+  </div>
+  <div class="note"><b>The surprising part:</b> the LED lamp itself is not regulated at all — only the gel is. The blue light is mostly marketing theatre; the chemistry does the whitening. That's why a S$149 studio session and a S$1,000 dentist session can both be called "LED whitening" yet be completely different products.</div>
+</section>
+
+<section id="players">
+  <div class="eyebrow">Part 2 · Who's who</div>
+  <h2>The players, tier by tier</h2>
+  <p class="muted">Pick a tier to see the leading names, what they charge, and why they win.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-panel="p-dental">🏥 Dental clinics</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="p-studio">💡 Whitening studios</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="p-home">🏠 Home kits</button>
+  </div>
+
+  <div class="panel show" id="p-dental" role="tabpanel">
+    <div class="pcards">
+      <div class="pcard"><div class="rank">Most outlets</div><h3>Q&amp;M Dental</h3>
+        <div class="price num">S$388 <small style="font-weight:400">take-home kit, all-in</small></div>
+        <small>Singapore's largest dental chain. Wins on sheer ubiquity — and dentists are the only tier legally allowed to use strong peroxide. In-office sessions cost more (roughly S$900+).</small></div>
+      <div class="pcard"><div class="rank">The premium brand</div><h3>Philips Zoom</h3>
+        <div class="price num">~S$450–950 <small style="font-weight:400">per treatment</small></div>
+        <small>Not a clinic — the technology used by many clinics. A dentist applies strong gel, a blue LED lamp accelerates it: up to 8 shades whiter in about 45 minutes. The gold standard for results.</small></div>
+      <div class="pcard"><div class="rank">Why this tier wins</div><h3>The legal monopoly</h3>
+        <div class="price">Real results</div>
+        <small>Only dentists may use gel above 0.1% peroxide. Effectiveness is, by law, a dentist-only product. You pay for the chemistry and the qualified hands, not the light.</small></div>
+    </div>
+  </div>
+
+  <div class="panel" id="p-studio" role="tabpanel">
+    <div class="pcards">
+      <div class="pcard"><div class="rank">Biggest name</div><h3>Wellaholic "TeethWhite"</h3>
+        <div class="price num">S$119–149 <small style="font-weight:400">per session</small></div>
+        <small>Aesthetics chain, multiple outlets, claims "No. 1 in Singapore" with 18,000+ customers — note this is their own unaudited claim. Wins on transparent pricing and monthly unlimited plans (from S$279/month).</small></div>
+      <div class="pcard"><div class="rank">Mall player</div><h3>Mirage Aesthetic</h3>
+        <div class="price num">S$138 <small style="font-weight:400">promo (list S$480)</small></div>
+        <small>Outlets in VivoCity, Scotts Square and Raffles City; strong Google ratings. Wins on prime locations and heavy promotional pricing.</small></div>
+      <div class="pcard"><div class="rank">The catch</div><h3>Weak gel by law</h3>
+        <div class="price">Marketing &gt; chemistry</div>
+        <small>Studios are capped at 0.1% peroxide — the same as a home product. The Singapore Dental Association publicly warns against non-dentist whitening. Cheap and pleasant, but the results are cosmetic-grade, not clinical.</small></div>
+    </div>
+    <div class="note">If you're evaluating this segment commercially: it carries real regulatory risk. The dental profession is openly against it, and one rule-tightening by HSA could squeeze the whole tier.</div>
+  </div>
+
+  <div class="panel" id="p-home" role="tabpanel">
+    <div class="pcards">
+      <div class="pcard"><div class="rank">Local champion</div><h3>Zenyum</h3>
+        <div class="price num">S$32.90–229.90</div>
+        <small>Singapore brand, sold in NTUC FairPrice. The cleverest player: peroxide-free strips and serums over the counter, and a stronger peroxide pen (S$229.90) routed through dentists — perfectly shaped around the regulation.</small></div>
+      <div class="pcard"><div class="rank">Global fad-maker</div><h3>Hismile</h3>
+        <div class="price num">~US$29–35</div>
+        <small>The TikTok brand that made LED kits famous — and has now quietly dropped LED devices entirely. Today it sells peroxide-free strips and the famous purple V34 serum, which doesn't bleach at all: it colour-corrects, like concealer for teeth.</small></div>
+      <div class="pcard"><div class="rank">The long tail</div><h3>Marketplace kits</h3>
+        <div class="price num">S$34–292</div>
+        <small>Dozens of imported LED kits on Shopee, Lazada, Watsons and Guardian. All capped at 0.1% peroxide — so results vary from mild to none. Convenience is the product.</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="eyebrow">Part 3 · What you actually pay</div>
+  <h2>Price versus strength, at a glance</h2>
+  <p class="muted">The price ladder mirrors the peroxide ladder. You are paying for legal access to the strong chemistry.</p>
+  <div class="bars" id="bars">
+    <div class="bar-row"><span>Home kit (retail)</span><div class="bar-track"><div class="bar-fill soft" data-w="8"><span class="num">from ~S$34</span></div></div></div>
+    <div class="bar-row"><span>Studio session</span><div class="bar-track"><div class="bar-fill soft" data-w="15"><span class="num">~S$119–149</span></div></div></div>
+    <div class="bar-row"><span>Dentist take-home</span><div class="bar-track"><div class="bar-fill" data-w="35"><span class="num">S$388</span></div></div></div>
+    <div class="bar-row"><span>In-clinic (Philips Zoom)</span><div class="bar-track"><div class="bar-fill" data-w="70"><span class="num">~S$450–950</span></div></div></div>
+    <div class="bar-row"><span>Premium in-clinic</span><div class="bar-track"><div class="bar-fill dark" data-w="100"><span class="num">up to ~S$1,300</span></div></div></div>
+  </div>
+</section>
+
+<section id="global">
+  <div class="eyebrow">Part 4 · The global picture</div>
+  <h2>Steady market, changing fashion</h2>
+  <div class="trend-grid">
+    <div class="tcard"><div class="big num" data-count="8.93" data-prefix="US$" data-suffix="B">US$0B</div>
+      <p><b>Market today (2025).</b> Growing to ~US$14.3B by 2034 — a steady ~5% a year. Solid, not a gold rush. <span class="muted">(Fortune Business Insights)</span></p></div>
+    <div class="tcard"><div class="big">LED → chemistry</div>
+      <p><b>The LED-kit fad has peaked.</b> Hismile, the brand that started it, no longer sells a single LED device. The industry now competes on gentler formulas (PAP — peroxide-free) instead of blue lights.</p></div>
+    <div class="tcard"><div class="big" style="color:#7c3aed">Purple, not white</div>
+      <p><b>The viral "purple toothpaste"</b> doesn't bleach — purple sits opposite yellow on the colour wheel, so it visually cancels yellow tones. Makeup for teeth, and a huge TikTok category.</p></div>
+    <div class="tcard"><div class="big">DTC reality check</div>
+      <p><b>SmileDirectClub shut down globally in Dec 2023.</b> The lesson across smile-DTC: "clinical results at home without clinicians" didn't survive regulators, dentists, or the economics.</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="eyebrow">Part 5 · Plain-English answers</div>
+  <h2>The questions everyone asks</h2>
+  <div style="margin-top:20px">
+    <div class="faq-item">
+      <button class="q" aria-expanded="false">So… does the blue LED light actually whiten teeth?</button>
+      <div class="a">Barely, on its own. The light only accelerates a peroxide gel — and the gel does the whitening. With strong dentist-grade gel, the lamp helps. With the weak 0.1% gel that studios and home kits are limited to, the lamp is mostly showmanship. Notably, the lamp itself isn't even a regulated product in Singapore — only the gel is.</div>
+    </div>
+    <div class="faq-item">
+      <button class="q" aria-expanded="false">Why is the dentist 10× the price of a studio?</button>
+      <div class="a">Because by law only a dentist may use gel above 0.1% peroxide — in-clinic they can go up to 35%. You're paying for legally-exclusive chemistry plus trained supervision. The studio's S$149 session cannot legally contain the ingredient that produces dramatic results.</div>
+    </div>
+    <div class="faq-item">
+      <button class="q" aria-expanded="false">Are the cheap studios and home kits safe?</button>
+      <div class="a">The products are mild by design, so chemical risk is low — but the Singapore Dental Association warns against whitening done by non-dentist "therapists", because untrained application can still damage teeth and gums, and stains sometimes signal problems that need a dentist first.</div>
+    </div>
+    <div class="faq-item">
+      <button class="q" aria-expanded="false">If I just want whiter teeth, what's the sensible path?</button>
+      <div class="a">Budget: peroxide-free strips/serums (Zenyum, Hismile) for a mild lift, or purple serum for an instant cosmetic effect. Real change: dentist take-home kit (~S$388 at Q&amp;M) is the best value-for-result. Fastest and strongest: in-clinic Philips Zoom, from roughly S$450–950.</div>
+    </div>
+    <div class="faq-item">
+      <button class="q" aria-expanded="false">Where is this market heading?</button>
+      <div class="a">Three directions: (1) gentler peroxide-free chemistry taking over retail shelves, (2) colour-correcting "makeup for teeth" as its own category, and (3) the professional dentist tier staying premium and protected. The LED device itself is fading into a bundled accessory rather than the star of the show.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="badge">How this was fact-checked</span>
+    <p style="margin-top:12px">This briefing was produced with a multi-source research process: 22 sources fetched, 100 claims extracted, and the 25 most important claims each tested by three independent verification passes against the original documents. 19 were confirmed, 3 were rejected and excluded, 3 could not be re-verified and are shown as approximate ("~"). Prices are indicative as of July 2026 and change with promotions.</p>
+    <div class="tbl-scroll"><table>
+      <tr><th>Key sources</th><th>What they anchor</th></tr>
+      <tr><td><a href="https://www.hsa.gov.sg/announcements/online-diy-teeth-whitening-kit-pain/">Health Sciences Authority</a>, <a href="https://sda.org.sg/public/tooth-whitening-bleaching/">Singapore Dental Association</a></td><td>The peroxide rules (0.1% / 6% / 35%) and safety warnings</td></tr>
+      <tr><td><a href="https://qandm.com.sg/Whats-New/104/Take-home-teeth-whitening/EN">Q&amp;M Dental</a>, <a href="https://www.philips.com.sg/c-e/pe/teeth-whitening/zoom-in-office.html">Philips Zoom SG</a>, <a href="https://wellaholic.com/teethwhite/">Wellaholic</a>, <a href="https://zenyum.sg/pages/zenyumbright-series">Zenyum</a>, <a href="https://us.hismileteeth.com/">Hismile</a></td><td>Provider pricing and product claims (from their own pages)</td></tr>
+      <tr><td><a href="https://www.fortunebusinessinsights.com/teeth-whitening-market-110349">Fortune Business Insights</a></td><td>Global market size and growth rate</td></tr>
+    </table></div>
+    <p style="margin-top:16px">Prepared by GA Capital research · This is market commentary, not dental or investment advice.</p>
+  </div>
+</footer>
+
+<script>
+// Peroxide slider
+const pct=document.getElementById('pct'),read=document.getElementById('pctRead'),
+      v=document.getElementById('verdict'),vt=document.getElementById('vTitle'),vb=document.getElementById('vBody');
+function pctVal(x){ // 0-100 slider → 0-35% non-linear (more room at low end)
+  const t=x/100; return +(35*t*t).toFixed(1);
+}
+function update(){
+  let val=pctVal(+pct.value);
+  if(+pct.value<=6) val=Math.min(val,0.1)||0.1*(+pct.value/6);
+  const shown=val<1?val.toFixed(1):val.toFixed(0);
+  read.textContent=(val<0.1?0.1:shown)+'%';
+  if(val<=0.1){v.className='verdict ok';vt.textContent='Anyone can sell this to you';
+    vb.textContent='This is the legal ceiling for shops, whitening studios, and home kits. Very mild — closer to whitening toothpaste than a clinical treatment.';}
+  else if(val<=6){v.className='verdict rx';vt.textContent='Dentist prescription needed';
+    vb.textContent='Up to 6% peroxide can only be prescribed by a registered dentist for home use, after a consultation. This is the "take-home kit" tier (e.g. Q&M at S$388).';}
+  else{v.className='verdict no';vt.textContent='Dentist\'s chair only';
+    vb.textContent='Between 6% and 35% peroxide may only be used under a dentist\'s direct supervision. This is where the dramatic “8 shades in 45 minutes” results live (e.g. Philips Zoom).';}
+}
+pct.addEventListener('input',update);update();
+
+// Tabs
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('show'));
+  t.setAttribute('aria-selected','true');
+  document.getElementById(t.dataset.panel).classList.add('show');
+}));
+
+// FAQ
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',()=>{
+  const open=q.getAttribute('aria-expanded')==='true';
+  q.setAttribute('aria-expanded',String(!open));
+  q.nextElementSibling.classList.toggle('show',!open);
+}));
+
+// Bars + counter on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  e.target.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+  e.target.querySelectorAll('[data-count]').forEach(el=>{
+    const end=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';let s=null;
+    const step=ts=>{if(!s)s=ts;const p=Math.min((ts-s)/900,1);
+      el.textContent=pre+(end*p).toFixed(2)+suf;if(p<1)requestAnimationFrame(step);};
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=pre+end+suf;}
+    else requestAnimationFrame(step);
+  });
+  io.unobserve(e.target);
+}),{threshold:.3});
+io.observe(document.getElementById('bars'));
+io.observe(document.querySelector('.trend-grid'));
+</script>
